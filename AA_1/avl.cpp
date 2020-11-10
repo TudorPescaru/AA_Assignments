@@ -1,19 +1,23 @@
 // Copyright 2020 Pescaru Tudor-Mihai 321CA
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
 #include "avl.h"
 
 Node::Node(int value) {
-    value = value;
-    left = NULL;
-    right = NULL;
-    height = 1;
+    this->value = value;
+    this->left = NULL;
+    this->right = NULL;
+    this->height = 1;
 }
 
-AVL::AVL(int value) {
-    root = new Node(value);
+AVL::AVL() {
+    this->root = NULL;
+}
+
+AVL::~AVL() {
+    clearAVL(this->root);
 }
 
 int AVL::max(int a, int b) {
@@ -42,7 +46,7 @@ Node* AVL::getMinValue(Node *node) {
     return curr;
 }
 
-Node* AVL::rightRotate(Node *toRotate) {
+Node* AVL::rotateRight(Node *toRotate) {
     Node *newRoot = toRotate->left;
     Node *tmp = newRoot->right;
 
@@ -55,7 +59,7 @@ Node* AVL::rightRotate(Node *toRotate) {
     return newRoot;
 }
 
-Node* AVL::leftRotate(Node *toRotate) {
+Node* AVL::rotateLeft(Node *toRotate) {
     Node *newRoot = toRotate->right;
     Node *tmp = newRoot->left;
 
@@ -70,7 +74,7 @@ Node* AVL::leftRotate(Node *toRotate) {
 
 Node* AVL::insertNode(Node* node, int value) {
     if (node == NULL) {
-        node = new Node(value);
+        return new Node(value);
     }
 
     if (value < node->value) {
@@ -86,21 +90,21 @@ Node* AVL::insertNode(Node* node, int value) {
     int balance = getBalance(node);
 
     if (balance > 1 && value < node->left->value) {
-        return rightRotate(node);
+        return rotateRight(node);
     }
 
     if (balance < -1 && value > node->right->value) {
-        return leftRotate(node);
+        return rotateLeft(node);
     }
 
     if (balance > 1 && value > node->left->value) {
-        node->left = leftRotate(node->left);
-        return rightRotate(node);
+        node->left = rotateLeft(node->left);
+        return rotateRight(node);
     }
 
     if (balance < -1 && value < node->right->value) {
-        node->right = rightRotate(node->right);
-        return leftRotate(node);
+        node->right = rotateRight(node->right);
+        return rotateLeft(node);
     }
 
     return node;
@@ -110,7 +114,7 @@ Node* AVL::deleteNode(Node* node, int value) {
     if (node == NULL) {
         return node;
     }
-
+    
     if (value < node->value) {
         node->left = deleteNode(node->left, value);
     } else if (value > node->value) {
@@ -118,14 +122,16 @@ Node* AVL::deleteNode(Node* node, int value) {
     } else {
         if (node->left == NULL || node->right == NULL) {
             Node *tmp = node->left ? node->left : node->right;
-
-            if (tmp == NULL) {
-                tmp = node;
-                node = NULL;
+            if (tmp == NULL) {  
+                tmp = node;  
+                node = NULL;  
             } else {
-                *node = *tmp;
-                free(tmp);
+                node->value = tmp->value;
+                node->left = tmp->left;
+                node->right = tmp->right;
+                node->height = tmp->height;
             }
+            delete tmp;
         } else {
             Node *tmp = getMinValue(node->right);
             node->value = tmp->value;
@@ -142,23 +148,41 @@ Node* AVL::deleteNode(Node* node, int value) {
     int balance = getBalance(node);
 
     if (balance > 1 && getBalance(node->left) >= 0) {
-        return rightRotate(node);
+        return rotateRight(node);
     }
 
     if (balance < -1 && getBalance(node->right) <= 0) {
-        return leftRotate(node);
+        return rotateLeft(node);
     }
 
     if (balance > 1 && getBalance(node->left) < 0) {
-        node->left = leftRotate(node->left);
-        return rightRotate(node);
+        node->left = rotateLeft(node->left);
+        return rotateRight(node);
     }
 
     if (balance < -1 && getBalance(node->right) > 0) {
-        node->right = rightRotate(node->right);
-        return leftRotate(node->left);
+        node->right = rotateRight(node->right);
+        return rotateLeft(node->left);
     }
 
+    return node;
+}
+
+Node* AVL::clearAVL(Node *node) {
+    if (node == NULL) {
+        return node;
+    }
+    if (node->left != NULL) {
+        node->left = clearAVL(node->left);
+    }
+    if (node->right != NULL) {
+        node->right = clearAVL(node->right);
+    }
+    Node *tmp = node;
+    if (node->left == NULL && node->right == NULL) {
+        delete tmp;
+        node = NULL;
+    }
     return node;
 }
 
