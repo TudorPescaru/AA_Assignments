@@ -20,6 +20,21 @@ AVL::~AVL() {
     clearAVL(this->root);
 }
 
+void AVL::insertValue(int value) {
+    this->root = this->insertNode(this->root, value);
+}
+
+void AVL::removeMinValue() {
+    this->root = this->removeNode(this->root, this->getMinValue());
+}
+
+int AVL::getMinValue() {
+    if (this->root != NULL) {
+        return this->getMinNode(this->root)->value;
+    }
+    return -1;
+}
+
 int AVL::max(int a, int b) {
     return (a > b) ? a : b;
 }
@@ -38,7 +53,7 @@ int AVL::getBalance(Node *node) {
     return height(node->left) - height(node->right);
 }
 
-Node* AVL::getMinValue(Node *node) {
+Node* AVL::getMinNode(Node *node) {
     Node *curr = node;
     while (curr->left != NULL) {
         curr = curr->left;
@@ -110,15 +125,15 @@ Node* AVL::insertNode(Node* node, int value) {
     return node;
 }
 
-Node* AVL::deleteNode(Node* node, int value) {
+Node* AVL::removeNode(Node* node, int value) {
     if (node == NULL) {
         return node;
     }
     
     if (value < node->value) {
-        node->left = deleteNode(node->left, value);
+        node->left = removeNode(node->left, value);
     } else if (value > node->value) {
-        node->right = deleteNode(node->right, value);
+        node->right = removeNode(node->right, value);
     } else {
         if (node->left == NULL || node->right == NULL) {
             Node *tmp = node->left ? node->left : node->right;
@@ -133,9 +148,9 @@ Node* AVL::deleteNode(Node* node, int value) {
             }
             delete tmp;
         } else {
-            Node *tmp = getMinValue(node->right);
+            Node *tmp = getMinNode(node->right);
             node->value = tmp->value;
-            node->right = deleteNode(node->right, tmp->value);
+            node->right = removeNode(node->right, tmp->value);
         }
     }
 
