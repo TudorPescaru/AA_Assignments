@@ -1,9 +1,9 @@
 // Copyright 2020 Pescaru Tudor-Mihai 321CA
 #include <iostream>
 
-#include "heap.h"
-
 using namespace std;
+
+#include "heap.h"
 
 // Intialise an empty heap
 Heap::Heap() {

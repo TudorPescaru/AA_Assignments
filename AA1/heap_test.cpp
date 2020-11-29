@@ -3,9 +3,9 @@
 #include <fstream>
 #include <string>
 
-#include "heap.h"
-
 using namespace std;
+
+#include "heap.h"
 
 int main(int argc, char *argv[]) {
     Heap *heap = new Heap();

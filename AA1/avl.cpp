@@ -1,9 +1,9 @@
 // Copyright 2020 Pescaru Tudor-Mihai 321CA
 #include <iostream>
 
-#include "avl.h"
-
 using namespace std;
+
+#include "avl.h"
 
 // Create a new node with given value
 Node::Node(int value) {

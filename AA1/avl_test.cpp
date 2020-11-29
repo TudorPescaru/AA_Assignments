@@ -3,9 +3,9 @@
 #include <fstream>
 #include <string>
 
-#include "avl.h"
-
 using namespace std;
+
+#include "avl.h"
 
 int main(int argc, char *argv[]) {
     AVL *avl = new AVL();

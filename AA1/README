@@ -39,3 +39,5 @@ timp ce urmatoarele doua vor necesita o operatie de corectare dupa fiecare
 inserare sau stergere. Restul testelor ofera o simulare cat mai apropiata de o 
 utilizare in viata reala, comportamentul fiind impredictibil. Testele au fost 
 generate o singura data si au fost apoi rulate folosind ambele implementari.
+In rezultatele testelor pot aparea mici discrepante intre cele doua moduri de 
+implementare deoarece AVL nu suporta duplicate in timp ce Heap suporta.
