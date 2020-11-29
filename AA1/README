@@ -1,1 +1,41 @@
 Copyright 2020 Pescaru Tudor-Mihai 321CA
+
+Pentru cele doua implementari de priority queue, am realizat cate trei fisiere 
+ce descriu modalitatea de implementare si testare.
+
+Pentru AVL:
+    avl.h - definitia claselor AVL si Node cu semnaturile metodelor si 
+            campurile acestora
+    avl.cpp - implementarea metodelor din clase; implementarea a fost preluata 
+              de pe GeeksForGeeks si adaptata cu mici modificari
+    avl_test.cpp - parsarea unui test dat ca argument si realizarea operatiilor
+Pentru Heap:
+    heap.h - definitia clasei Heap cu semnaturile metodelor si campurile sale
+    heap.cpp - implementarea metodelor clasei; implementarea a fost realizta 
+               urmarind un set de explicatii video de pe platforma AlgoExpert
+    heal_test.cpp - parsarea unui test dat ca argument si realizarea 
+                    operatiilor
+
+Pentru a genera testele am creeat un script in Python, test_generator.py ce 
+va creea 10 teste in folderul in/. Testele au fost concepute urmarind formatul 
+de testare descris in documentatia online de pe site-ul GCC. Acest format de 
+testare este utilizat pentru testarea performantei structurii de date priority 
+queue din STL. Testele sunt de diferite dimensiuni, aceste dimensiuni 
+reprezentand numarul de valori ce vor fi adaugate in priority queue. Aceste 
+dimensiuni sunt de 10k, 100k si 1m. La acest numar presatbilit, se adauga si 
+un numar aleator de operatii de obtinere a minimului si de stergere a 
+minimului. Acest numar aleator este dat de faptul ca la fiecare operatie de 
+inserare exista o sansa de 50% sa apara si o operatie de alt tip. Testele au 
+fost grupate in perechi, fiecare pereche avand un test in care se afla doar 
+operatii de inserare si un numar aleator de operatii de obtinere a minimului si 
+un test in care apar in plus si un numar aleator de operatii de stergere a 
+minimului. Primele 4 teste sunt realizate folosind o insiruire de valori 
+predictibile, primele 2 avand valori consecutive in oridne crescatoare, iar 
+urmatoarele 2 avand valori consecutive in ordine descrescatoare. Urmatoarele 6 
+teste au valori aleatoare generate in intervalul [0, dimensiunea testului]. 
+Primele 2 teste sunt menite sa ofere un scenariu in care inserarile si 
+stergerile nu necesita operatii extra de corectare a asezarii elementelor, in 
+timp ce urmatoarele doua vor necesita o operatie de corectare dupa fiecare 
+inserare sau stergere. Restul testelor ofera o simulare cat mai apropiata de o 
+utilizare in viata reala, comportamentul fiind impredictibil. Testele au fost 
+generate o singura data si au fost apoi rulate folosind ambele implementari.
