@@ -8,13 +8,12 @@ Pentru AVL:
             campurile acestora
     avl.cpp - implementarea metodelor din clase; implementarea a fost preluata 
               de pe GeeksForGeeks si adaptata cu mici modificari
-    avl_test.cpp - parsarea unui test dat ca argument si realizarea operatiilor
+    avl_test.cpp - parsarea unui test dat la stdin si realizarea operatiilor
 Pentru Heap:
     heap.h - definitia clasei Heap cu semnaturile metodelor si campurile sale
     heap.cpp - implementarea metodelor clasei; implementarea a fost realizta 
                urmarind un set de explicatii video de pe platforma AlgoExpert
-    heal_test.cpp - parsarea unui test dat ca argument si realizarea 
-                    operatiilor
+    heal_test.cpp - parsarea unui test dat la stdin si realizarea operatiilor
 
 Pentru a genera testele am creeat un script in Python, test_generator.py ce 
 va creea 10 teste in folderul in/. Testele au fost concepute urmarind formatul 

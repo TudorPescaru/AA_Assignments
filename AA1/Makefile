@@ -28,23 +28,23 @@ clean:
 		rm $(HEAP_TARGET) $(AVL_TARGET) $(HEAP_OBJECTS) $(AVL_OBJECTS)
 
 run_tests:
-		./$(HEAP_TARGET) in/test0.in
-		./$(HEAP_TARGET) in/test1.in
-		./$(HEAP_TARGET) in/test2.in
-		./$(HEAP_TARGET) in/test3.in
-		./$(HEAP_TARGET) in/test4.in
-		./$(HEAP_TARGET) in/test5.in
-		./$(HEAP_TARGET) in/test6.in
-		./$(HEAP_TARGET) in/test7.in
-		./$(HEAP_TARGET) in/test8.in
-		./$(HEAP_TARGET) in/test9.in
-		./$(AVL_TARGET) in/test0.in
-		./$(AVL_TARGET) in/test1.in
-		./$(AVL_TARGET) in/test2.in
-		./$(AVL_TARGET) in/test3.in
-		./$(AVL_TARGET) in/test4.in
-		./$(AVL_TARGET) in/test5.in
-		./$(AVL_TARGET) in/test6.in
-		./$(AVL_TARGET) in/test7.in
-		./$(AVL_TARGET) in/test8.in
-		./$(AVL_TARGET) in/test9.in
+		./$(HEAP_TARGET) < in/test0.in
+		./$(HEAP_TARGET) < in/test1.in
+		./$(HEAP_TARGET) < in/test2.in
+		./$(HEAP_TARGET) < in/test3.in
+		./$(HEAP_TARGET) < in/test4.in
+		./$(HEAP_TARGET) < in/test5.in
+		./$(HEAP_TARGET) < in/test6.in
+		./$(HEAP_TARGET) < in/test7.in
+		./$(HEAP_TARGET) < in/test8.in
+		./$(HEAP_TARGET) < in/test9.in
+		./$(AVL_TARGET) < in/test0.in
+		./$(AVL_TARGET) < in/test1.in
+		./$(AVL_TARGET) < in/test2.in
+		./$(AVL_TARGET) < in/test3.in
+		./$(AVL_TARGET) < in/test4.in
+		./$(AVL_TARGET) < in/test5.in
+		./$(AVL_TARGET) < in/test6.in
+		./$(AVL_TARGET) < in/test7.in
+		./$(AVL_TARGET) < in/test8.in
+		./$(AVL_TARGET) < in/test9.in

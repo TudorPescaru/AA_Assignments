@@ -57,6 +57,7 @@ for i in range(10):
     file_name = "test" + str(i) + ".in"
     path = path_in + file_name
     with open(path, "w+") as f:
+        f.write(path + ' ')
         if i == 0:
             create_test_predefined(test_sizes[1], f)
         elif i == 1:

@@ -7,39 +7,31 @@ using namespace std;
 
 #include "avl.h"
 
-int main(int argc, char *argv[]) {
+int main() {
     AVL *avl = new AVL();
 
-    // Check if program has an input test file arg
-    if (argc < 2) {
-        cout << "No test file provided!" << endl;
-        delete avl;
-        exit(-1);
-    }
-
-    // Open input test file
-    ifstream input_file(argv[1]);
+    int num_operations, num, min;
+    string input_path, output_path, operation;
+    
+    // Get input file path
+    cin >> input_path;
+    // Get size of test
+    cin >> num_operations;
 
     // Create and open output test file
-    string output_path = argv[1];
+    output_path = input_path;
     output_path = output_path.substr(3, 5);
-    output_path = "out/" + output_path + ".out";
+    output_path = "out/" + output_path + "_avl.out";
     ofstream output_file(output_path);
 
-    int num_operations, num, min;
-    string operation;
-
-    // Get size of test
-    input_file >> num_operations;
-
     // Print test and test size
-    cout << "Running " << argv[1] << " with " << num_operations << " elements" << endl; 
+    cout << "Running " << input_path  << " with " << num_operations << " elements" << endl; 
     
     // Read and execute commands from test
-    while (!input_file.eof()) {
-        input_file >> operation;
+    while (cin) {
+        cin >> operation;
         if (operation == "push") {
-            input_file >> num;
+            cin >> num;
             avl->insertValue(num);
             output_file << "Pushed value: " << num << endl;
         } else if (operation == "pop") {
@@ -55,8 +47,9 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // Close files
-    input_file.close();
+    cout << "Done! Test output stored in " << output_path << endl;
+
+    // Close output file
     output_file.close();
 
     delete avl;
