@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <chrono>
+#include <sys/resource.h>
 
 using namespace std;
 
@@ -27,6 +29,7 @@ int main() {
     // Print test and test size
     cout << "Running " << input_path  << " with " << num_operations << " elements" << endl; 
     
+    auto start = chrono::high_resolution_clock::now();
     // Read and execute commands from test
     while (cin) {
         cin >> operation;
@@ -46,8 +49,13 @@ int main() {
             }
         }
     }
+    auto end = chrono::high_resolution_clock::now();
 
     cout << "Done! Test output stored in " << output_path << endl;
+    cout << "Total running time: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << " ms" << endl;
+    struct rusage r_usage;
+    getrusage(RUSAGE_SELF, &r_usage);
+    cout << "Total memory used: " << r_usage.ru_maxrss << " kilobytes" << endl;
 
     // Close output file
     output_file.close();
