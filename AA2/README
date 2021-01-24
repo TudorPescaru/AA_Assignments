@@ -1,0 +1,70 @@
+2021 Pescaru Tudor-Mihai 321CA
+
+Task 1
+
+Pentru acest task am obesrvat ca problema data este de fapt o interpretare a 
+problemei k-colorarii intr-un graf in care familiile sunt nodurile, relatiile 
+dintre ele sunt muchiile iar culorile sunt spionii. Astfel, in codarea pentru 
+SAT vom avea N * K variabile si N + N * (K * (K - 1)) / 2 + K * M clauze. 
+Pentru a coda variabilele am ales urmatoarea formula: variabila ce descrie 
+familia i pentru spionul j va avea id-ul (i - 1) * K + j. Primele N clauze vor 
+asigura faptul ca fiecare familie primeste un spion. Urmatoarele 
+N * (K * (K - 1)) / 2 clauze vor asigura faptul ca fiecare familie va primii 
+cel mult un spion. Ultimele K * M clauze vor asigura faptul ca doua familii 
+care se inteleg nu vor primii acelasi spion. Per total, metoda solve() a acestui 
+va avea o complexitate temporala de O(N^2 + N * K^2 + M) si o complexitate 
+spatiala de O(N^2 + N * K).
+
+Task 2
+
+Pentru acest task am folosit "pergament-ul" dat pentru a observa faptul ca 
+task-ul este o interpretare a problemei k-clicii intr-un graf in care 
+familiile sunt nodurile, relatiile dintre ele sunt muchiile iar dimensiunea 
+familiei extinse este dimensiunea clicii. In codarea SAT vom utiliza N * K 
+variabile codate dupa urmatoarea formula: variabila pentru familia i pe 
+pozitia j din clica va avea id-ul (i - 1) * k + j. Utilizand datele din 
+"pergament" vom avea urmatoarele seturi de clauze: un set de clauze ce vor 
+asigura faptul ca pentru fiecare pozitie din clica exista o familie, un set 
+de clauze ce va asigura faptul ca  doua familii ce nu se inteleg nu pot fi 
+incluse in aceeasi clica, un set de clauze ce vor asigura faptul ca pentru 
+oricare doua pozitii din clica, familiile sunt diferite si un set de clauze 
+ce vor asigura faptul ca doua familii diferite nu pot ocupa aceeasi pozitie 
+in clica. Per total, metoda solve() pentru acest task va avea o complexitate 
+temporala de O(N^2 * K^2 + M) si o complexitate spatiala de O(N^2 * K^2).
+
+Task 3
+
+Pentru acest task am observat ca problema data este de fapt o interpretare a 
+problemet min vertex cover intr-un graf in care familiile sunt nodurile, 
+relatiile dintre ele sunt muchiile iar numarul minim de arestari este 
+dimensiunea minima a unui vertex cover ce poate fi realizat. Astfel, acest task 
+va consta in reducerea problemei min vertex cover la problema k-clicii. Acest 
+lucru va fi facut construind graful complementar, in care familiile care nu au 
+relatii in mod normal vor avea relatii iar cele cu relatii le vor pierde. De 
+asemenea, deoarece problema necesita si un K pentru dimensiunea clicii, acesta 
+va fi ales cat mai mare incepand cu numarul de familii N. acest fapt va 
+determina gasirea celei mai mari clici din graful complement, adica gasirea 
+celui mai mic vertex cover din graful normal. Output-ul dat de task 2 va 
+reprezenta lista de familii ce formeaza clica in graful complement, adica lista 
+de familii ce nu apartin vertex cover-ului din graful normal. Astfel, familiile 
+ce trebuie arestate sunt cele ce nu apar in output-ul de la task-ul 2. Metoda 
+solve() pentru acest task va avea o complexitate temporala de O(N^3 * K^2 + N * M) 
+si o complexitate spatiala de O(N^2 * K^2). Aceste complexitati sunt determinate 
+in principal de complexitatea task-ului 2.
+
+Bonus
+
+La acest task, deoarece problema este aceeasi ca cea de la task 3, inerpretarea 
+va fi aceeasi, problema fiind interpretata ca problema min vertex cover. Din 
+acest motiv, nodurile ce vor aparea in min vertex cover sunt familiile ce 
+trebuie arestate. Astfel, in codarea pentru SAT vom avea N variabile, N + M 
+clauze iar suma ponderilor clauzelor soft + 1 va fi N + 1. Primele M clauze vor 
+fi clauze hard si vor avea ponderea N + 1. Acestea vor asigura faptul ca pentru 
+oricare 2 familii conectate, doar una din acestea va aparea in vertex cover. 
+Urmatoarele N clauze vor fi clauze soft cu ponderea 1. Acestea vor asigura 
+faptul ca numarul de familii din vertex cover este minimizat. Acest lucru se 
+va realiza prin satisfacerea a cat mai multe din aceste clauze ce spun ca o 
+anumita familie nu apartine vertex cover-ului. Rezultatul final va contine cat 
+mai putine familii ce trebuie arestate pentru a elimina toate conexiunile 
+dintre familii. Metoda solve() a acestui task va avea o complexitate temporala 
+de O(N^2 + M) si o complexitate spatiala de O(N^2).
